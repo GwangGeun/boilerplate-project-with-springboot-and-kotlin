@@ -1,0 +1,44 @@
+<configuration debug="false">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.AccessEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <fieldName>ts</fieldName>
+                    <timeZone>UTC</timeZone>
+                    <pattern>[UNIX_TIMESTAMP_AS_NUMBER]</pattern>
+                </timestamp>
+                <threadName>
+                    <fieldName>thread</fieldName>
+                </threadName>
+                <requestHeaders>
+                    <fieldName>request_headers</fieldName>
+                    <filter>
+                        <exclude>Authorization</exclude>
+                    </filter>
+                </requestHeaders>
+                <responseHeaders/>
+                <remoteHost/>
+                <contentLength/>
+                <pattern>
+                    <pattern>
+                        {
+                        "app": "${spring.application.name}",
+                        "trace_id": "%i{X-B3-TraceId}",
+                        "span_id": "%i{X-B3-SpanId}",
+                        "level": "INFO",
+                        "logger": "access-log",
+                        "request_method": "%requestMethod",
+                        "request_uri": "%requestURI",
+                        "protocol": "%protocol",
+                        "referer": "%i{Referer}",
+                        "response_status" : "#asLong{%statusCode}",
+                        "response_time" : "#asLong{%elapsedTime}",
+                        "message" : "%statusCode %requestURL %elapsedTime"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+    <appender-ref ref="CONSOLE"/>
+</configuration>
