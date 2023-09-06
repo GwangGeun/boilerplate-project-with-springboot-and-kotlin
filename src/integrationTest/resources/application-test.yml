@@ -7,7 +7,8 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      # By using ddl-auto, we can create an initial database
+      ddl-auto: create
     properties:
       hibernate:
         #  show_sql: true ( Do not use it, show_sql will print log by using printer )

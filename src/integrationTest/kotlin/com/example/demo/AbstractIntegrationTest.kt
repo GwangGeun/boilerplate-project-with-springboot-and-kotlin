@@ -1,36 +1,32 @@
 package com.example.demo
 
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.util.TestPropertyValues
-import org.springframework.context.ApplicationContextInitializer
-import org.springframework.context.ConfigurableApplicationContext
-import org.springframework.test.context.ContextConfiguration
-import org.testcontainers.containers.GenericContainer
+import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.MySQLContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ContextConfiguration(initializers = [AbstractIntegrationTest.Initializer::class])
-abstract class AbstractIntegrationTest{
+@ActiveProfiles("test")
+@Testcontainers
+abstract class AbstractIntegrationTest {
 
     companion object {
-        val mysqlContainer = MySQLContainer("mysql:8.1.0")
+        @Container
+        val mysqlContainer = MySQLContainer("mysql:8.1.0").apply {
+            addExposedPort(3306)
+        }
 
-//        val mysqlContainer = GenericContainer<Nothing>("mysql:8.1.0")
-//            .apply { withExposedPorts(3306) }
-
-    }
-
-    internal class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
-        override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {
-            mysqlContainer.start()
-
-            println(mysqlContainer.firstMappedPort)
-
-            TestPropertyValues.of(
-                "spring.redis.host=${mysqlContainer.host}",
-                "spring.redis.port=${mysqlContainer.firstMappedPort}"
-            ).applyTo(configurableApplicationContext.environment)
+        @DynamicPropertySource
+        @JvmStatic
+        fun registerDynamicProperties(registry: DynamicPropertyRegistry) {
+            registry.add("spring.datasource.url", mysqlContainer::getJdbcUrl)
+            registry.add("spring.datasource.username", mysqlContainer::getUsername)
+            registry.add("spring.datasource.password", mysqlContainer::getPassword)
         }
     }
+
 
 }
