@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- local -->
-    <springProfile name="local">
+    <springProfile name="local,default">
         <include resource="org/springframework/boot/logging/logback/base.xml"/>
     </springProfile>
     <!-- dev,prod -->

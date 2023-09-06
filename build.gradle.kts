@@ -22,6 +22,7 @@ object Versions {
     const val KOTEST_EXTENSION = "1.1.3"
     const val MOCKK = "1.13.7"
 
+    const val TEST_CONTAINER_COORDINATES = "1.19.0"
 }
 
 group = "com.example"
@@ -32,7 +33,6 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 // https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests
 // Can refactor with JVM Test Suite Plugin ( incubating mode )
 sourceSets {
-
     create("integrationTest") {
         compileClasspath += sourceSets.main.get().output
         runtimeClasspath += sourceSets.main.get().output
@@ -48,7 +48,6 @@ configurations {
         extendsFrom(configurations.testRuntimeOnly.get())
     }
 }
-
 
 repositories {
     mavenCentral()
@@ -86,6 +85,7 @@ dependencies {
     // [ Database ]
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("com.h2database:h2")
+    // https://github.com/spring-projects/spring-boot/releases/tag/v2.7.8
     runtimeOnly("com.mysql:mysql-connector-j")
 
     // ==============================================================================
@@ -101,6 +101,13 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core")
     // mockk
     testImplementation("io.mockk:mockk:${Versions.MOCKK}")
+
+    // testContainer
+    testImplementation(platform("org.testcontainers:testcontainers-bom:${Versions.TEST_CONTAINER_COORDINATES}"))
+    testImplementation("org.testcontainers:mysql")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.junit.jupiter:junit-jupiter")
+
 
 //    integrationTestImplementation("org.springframework.boot:spring-boot-starter-test")
 }

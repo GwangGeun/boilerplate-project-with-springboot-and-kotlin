@@ -1,34 +1,21 @@
 spring:
-#  datasource:
-#    url: jdbc:h2:tcp://localhost/~/datajpa
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
+  datasource:
+    url: jdbc:mysql://localhost:3306/carrot
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
-    jpa:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
       hibernate:
-        ddl-auto: create
-      properties:
-        hibernate:
-          #        show_sql: true
-          format_sql: true
-#  datasource:
-#    url: jdbc:mariadb://free-tier-db.ccs9h25husie.eu-central-1.rds.amazonaws.com
-#    username: admin
-#    password: ekdrms34
-#    driver-class-name: org.mariadb.jdbc.Driver
-#
-#  jpa:
-#    hibernate:
-#      ddl-auto:
-#    properties:
-#      hibernate:
-#        #        show_sql: true
-#        format_sql: true
-#        # global 하게 적용하고 싶지 않으면 @BatchSize 를 활용할수도 있으나 global 하게 사용하는 것을 권장
-#        default_batch_fetch_size: 100
-#
+        #  show_sql: true ( Do not use it, show_sql will print log by using printer )
+        format_sql: true
+        # Instead of this, we can use @BatchSize, but highly recommended to use it globally
+        default_batch_fetch_size: 100
+
 logging:
   level:
-    # show_sql 과 달리 sql 을 logging 으로 출력
+    # Unlike show_sql, sql is supposed to be printed by logging
     org.hibernate.SQL: debug
