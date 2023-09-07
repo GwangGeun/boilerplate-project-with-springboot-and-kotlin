@@ -2,11 +2,11 @@ package com.example.demo
 
 import org.junit.jupiter.api.Test
 
-class DemoApplicationTests : AbstractIntegrationTest(){
+class DemoApplicationTests : AbstractIntegrationTest() {
 
-	@Test
-	fun first() {
-		println("first")
-	}
+    @Test
+    fun first() {
+        println("first")
+    }
 
 }

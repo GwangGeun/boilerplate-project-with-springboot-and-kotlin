@@ -84,7 +84,7 @@ dependencies {
 
     // [ Database ]
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    runtimeOnly("com.h2database:h2")
+//    runtimeOnly("com.h2database:h2")
     // https://github.com/spring-projects/spring-boot/releases/tag/v2.7.8
     runtimeOnly("com.mysql:mysql-connector-j")
 
