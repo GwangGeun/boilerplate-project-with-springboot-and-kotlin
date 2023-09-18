@@ -8,6 +8,7 @@ services:
     ports:
       - "3306:3306"
     environment:
+      MYSQL_DATABASE: "carrot"
       MYSQL_ROOT_PASSWORD: "test"
     command:
       - --character-set-server=utf8mb4
