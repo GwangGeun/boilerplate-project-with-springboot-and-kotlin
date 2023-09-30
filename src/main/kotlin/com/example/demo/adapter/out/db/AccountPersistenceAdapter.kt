@@ -6,6 +6,7 @@ import com.example.demo.application.port.`in`.AddAccountCommand
 import com.example.demo.application.port.out.InsertAccount
 import com.example.demo.application.port.out.LoadAccount
 import com.example.demo.application.port.out.UpdateAccountState
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 
 @Component

@@ -17,6 +17,7 @@ class JpaConfig {
     @Bean
     fun auditorProvider(): AuditorAware<String>? {
         return AuditorAware {
+            //TODO: Data should be extracted from token
             Optional.of(Random.nextInt(10000).toString())
         }
     }

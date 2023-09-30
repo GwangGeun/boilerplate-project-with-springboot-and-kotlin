@@ -17,6 +17,7 @@ object Versions {
     const val APP = "0.0.1-SNAPSHOT"
     const val LOGBACK_ENCODER = "7.2"
     const val SPRING_CLOUD_COORDINATES = "2022.0.4"
+    const val JJWT_COORDINATES = "0.11.5"
 
     const val KOTEST_COORDINATES = "5.6.2"
     const val KOTEST_EXTENSION = "1.1.3"
@@ -63,7 +64,7 @@ allOpen {
 dependencies {
     // [ boot ]
     implementation("org.springframework.boot:spring-boot-starter-web")
-//    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     // [ base ]
@@ -87,6 +88,12 @@ dependencies {
 //    runtimeOnly("com.h2database:h2")
     // https://github.com/spring-projects/spring-boot/releases/tag/v2.7.8
     runtimeOnly("com.mysql:mysql-connector-j")
+
+    // [ Jwt ]
+    // https://github.com/jwtk/jjwt
+    implementation("io.jsonwebtoken:jjwt-api:${Versions.JJWT_COORDINATES}")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:${Versions.JJWT_COORDINATES}")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:${Versions.JJWT_COORDINATES}")
 
     // ==============================================================================
     // [ test ]

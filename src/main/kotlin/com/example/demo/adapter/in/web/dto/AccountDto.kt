@@ -4,4 +4,4 @@ data class InquiryAccountNameResource(val name: String)
 
 data class UpdateAccountNameResource(val name: String)
 
-data class AddAccountResource(val name: String, val age: Int)
+data class AddAccountResource(val name: String, val password: String, val age: Int)
