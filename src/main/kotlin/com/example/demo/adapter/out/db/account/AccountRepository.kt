@@ -8,4 +8,6 @@ interface AccountRepository : JpaRepository<AccountEntity, Long> {
 
     fun findByName(name: String): AccountEntity?
 
+    fun findByRefreshToken(name: String): AccountEntity?
+
 }

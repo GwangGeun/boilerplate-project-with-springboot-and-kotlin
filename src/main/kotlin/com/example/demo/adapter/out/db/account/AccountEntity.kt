@@ -14,6 +14,7 @@ class AccountEntity(
     var name: String,
     var password: String,
     var age: Int,
+    var refreshToken: String? = ""
 ) : BaseEntity() {
     companion object {
         fun toEntity(addAccountCommand: AddAccountCommand): AccountEntity {
@@ -26,7 +27,16 @@ class AccountEntity(
              * - throws AssertionError when its argument is false (but only if JVM assertions are enabled with -ea). Use it to clarify outcomes and check your work.
              */
             check(addAccountCommand.age > 0) { "age must be greater than 0" }
-            return AccountEntity(name = addAccountCommand.name, password = addAccountCommand.password, age = addAccountCommand.age)
+            return AccountEntity(
+                name = addAccountCommand.name,
+                password = addAccountCommand.password,
+                age = addAccountCommand.age
+            )
         }
     }
+
+    fun updateRefreshToken(refreshToken: String?){
+        this.refreshToken = refreshToken
+    }
+
 }

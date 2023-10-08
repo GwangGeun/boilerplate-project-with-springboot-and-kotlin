@@ -2,6 +2,7 @@ package com.example.demo.config
 
 import com.example.demo.common.JwtTokenProvider
 import com.example.demo.common.LoggerExtensions.createLogger
+import com.example.demo.common.Token
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -46,7 +47,7 @@ class SecurityConfig(
                  * To configure ROLE related stuff, it should be defined before .authenticated()
                  * ex) it.requestMatchers("/api/v1/test02").hasRole("USER")
                  */
-                it.requestMatchers( "/signin/**", "/account/**").permitAll()
+                it.requestMatchers( "/signin/**", "/signup/**", "/refresh/**").permitAll()
                 it.anyRequest().authenticated()
             }
             .exceptionHandling {
@@ -71,7 +72,7 @@ class JwtAuthenticationFilter(
         filterChain: FilterChain
     ) {
         jwtTokenProvider.resolveToken(request)?.let {
-            if (jwtTokenProvider.validateToken(it)) {
+            if (jwtTokenProvider.validateToken(it, Token.ACCESS)) {
                 try {
                     val authentication = jwtTokenProvider.getAuthentication(it)
                     SecurityContextHolder.getContext().authentication = authentication

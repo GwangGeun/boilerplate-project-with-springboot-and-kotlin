@@ -4,4 +4,5 @@ import com.example.demo.adapter.out.db.account.AccountEntity
 
 interface LoadAccountEntity {
     fun getAccount(name: String): AccountEntity?
+    fun getAccountById(id: Long): AccountEntity?
 }
