@@ -7,9 +7,11 @@
 ## [Test code]
 
 ### 1. Done
+- Unit test & integration test are configured separately
+- TestContainer for integration test
 
 ### 2. Todo
-Unit & integration test separately
+- Test-Fixtures
 
 ## [[Logging]](https://spring.io/blog/2022/10/12/observability-with-spring-boot-3)
 
@@ -28,4 +30,4 @@ Unit & integration test separately
 ## [ETC]
 
 - Add FeignClient ( https://mangkyu.tistory.com/278, https://docs.spring.io/spring-cloud-openfeign/docs/4.0.4/reference/html/ )
-
+- Inject Secret values from somewhere
