@@ -18,11 +18,11 @@ class AccountE2ETests : AbstractIntegrationTest() {
     @Test
     fun second() {
         // given
-        val requestBody = AddAccountResource("carrot", 30)
+        val requestBody = AddAccountResource("carrot", "abcd!!23", 30)
 
         // when
         val responseEntity =
-            testRestTemplate.postForEntity("/account", requestBody, Long::class.java)
+            testRestTemplate.postForEntity("/signup", requestBody, Long::class.java)
 
         // then
         responseEntity.body!!.toInt() shouldBeGreaterThan 0

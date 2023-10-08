@@ -5,11 +5,13 @@ import com.example.demo.adapter.out.db.AccountPersistenceAdapter
 import com.example.demo.application.port.`in`.UpdateAccountNameCommand
 import io.kotest.core.spec.style.FunSpec
 import io.mockk.*
+import org.springframework.security.crypto.password.PasswordEncoder
 
 class UpdateAccountServiceTest : FunSpec({
 
     lateinit var accountPersistenceAdapter: AccountPersistenceAdapter
     lateinit var updateAccountService: UpdateAccountService
+    lateinit var passwordEncoder: PasswordEncoder
 
     /**
      * kotest lifecycle
@@ -22,7 +24,8 @@ class UpdateAccountServiceTest : FunSpec({
     beforeTest {
         clearAllMocks()
         accountPersistenceAdapter = mockk<AccountPersistenceAdapter>()
-        updateAccountService = UpdateAccountService(accountPersistenceAdapter)
+        passwordEncoder = spyk<PasswordEncoder>()
+        updateAccountService = UpdateAccountService(accountPersistenceAdapter, passwordEncoder)
     }
 
 

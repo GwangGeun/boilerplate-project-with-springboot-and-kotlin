@@ -23,7 +23,7 @@ object Versions {
     const val KOTEST_EXTENSION = "1.1.3"
     const val MOCKK = "1.13.7"
 
-    const val TEST_CONTAINER_COORDINATES = "1.19.0"
+    const val TEST_CONTAINER_COORDINATES = "1.19.1"
 }
 
 group = "com.example"
@@ -40,15 +40,23 @@ sourceSets {
     }
 }
 
-configurations {
-    "integrationTestImplementation" {
-        extendsFrom(configurations.testImplementation.get())
-    }
-
-    "integrationTestRuntimeOnly" {
-        extendsFrom(configurations.testRuntimeOnly.get())
-    }
+val integrationTestImplementation by configurations.getting {
+    extendsFrom(configurations.testImplementation.get())
 }
+val integrationTestRuntimeOnly by configurations.getting{
+    extendsFrom(configurations.testRuntimeOnly.get())
+}
+
+// exactly same config like above - different style
+//configurations {
+//    "integrationTestImplementation" {
+//        extendsFrom(configurations.testImplementation.get())
+//    }
+//
+//    "integrationTestRuntimeOnly" {
+//        extendsFrom(configurations.testRuntimeOnly.get())
+//    }
+//}
 
 repositories {
     mavenCentral()
