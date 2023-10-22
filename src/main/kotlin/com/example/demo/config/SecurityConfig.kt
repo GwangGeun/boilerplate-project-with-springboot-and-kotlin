@@ -48,7 +48,7 @@ class SecurityConfig(
                  * To configure ROLE related stuff, it should be defined before .authenticated()
                  * ex) it.requestMatchers("/api/v1/test02").hasRole("USER")
                  */
-                it.requestMatchers( "/signin/**", "/signup/**", "/refresh/**").permitAll()
+                it.requestMatchers( "/signin/**", "/signup/**", "/refresh/**", "/ping/**").permitAll()
                 it.anyRequest().authenticated()
             }
             .exceptionHandling {

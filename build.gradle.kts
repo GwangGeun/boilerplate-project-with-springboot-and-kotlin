@@ -161,6 +161,6 @@ tasks {
 // https://docs.gradle.org/current/userguide/idea_plugin.html#sec:idea_identify_additional_source_sets
 idea {
     module {
-        testSources.from(sourceSets["integrationTest"].java.srcDirs)
+        testSources.from(sourceSets["integrationTest"].kotlin.srcDirs)
     }
 }
